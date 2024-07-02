@@ -1,0 +1,25 @@
+{
+  "title": "facebook",
+  "subtitle": "Connect with friends and the world around you on Facebook.",
+  "footer": "Create a page for a celebrity, band or business.",
+  "meta": "Meta",
+  "about": "About",
+  "help": "Help",
+  "more": "More",
+  "forgot-password": "Forgot Password",
+  "forgot-password-text": "Enter the email address or your phone number you used when you joined, and we will send you instructions to reset your password.",
+  "btn-reset-link": "Send reset link",
+  "btn-login": "Log In",
+  "btn-create-new-account": "Create new account",
+  "form-title": "Connect to Facebook",
+  "or": "or",
+  "placeholder-email": "Email or phone number",
+  "placeholder-password": "Password",
+  "errors": {
+    "invalid-email": "Please enter a valid email address.",
+    "invalid-password": "The password requires an uppercase, lowercase, number and special character.",
+    "required-email": "Email is required.",
+    "required-password": "Password is required.",
+    "invalid-password-length": "This field should be at least 6 characters long."
+  }
+}
