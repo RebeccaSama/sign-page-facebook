@@ -51,7 +51,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive, ref, computed } from 'vue'
+import { onMounted, reactive } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, email, helpers } from '@vuelidate/validators'
 import { useI18n } from 'vue-i18n'

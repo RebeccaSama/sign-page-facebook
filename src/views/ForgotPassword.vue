@@ -1,11 +1,11 @@
 <template>
   <RouterLink to="/">
     <img
-      alt=""
+      alt="back"
       src="https://static.xx.fbcdn.net/rsrc.php/v3/ye/r/lfP8xYwPQXE.png"
       class="wbloks_1 m-4 mb-4"
-  /></RouterLink>
-
+    />
+  </RouterLink>
   <div
     class="justify-center w-[90%] max-w-[658px] items-center m-auto rounded-lg md:border px-16 py-12 md:bg-white md:shadow-lg"
   >
@@ -14,11 +14,16 @@
       {{ t('forgot-password-text') }}
     </p>
     <div class="mb-5">
-          <EmailInput v-model="form.email" />
-        <small data-test="errors" class="error text-red-500 " v-for="(error, index) of v$.email.$errors" :key="index">
-           {{error.$message}}
-        </small>
-        </div>
+      <EmailInput v-model="form.email" />
+      <small
+        data-test="errors"
+        class="error text-red-500"
+        v-for="(error, index) of v$.email.$errors"
+        :key="index"
+      >
+        {{ error.$message }}
+      </small>
+    </div>
     <div class="flex justify-center">
       <ButtonSign
         :button-title="t('btn-reset-link')"
@@ -31,24 +36,27 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import useVuelidate from '@vuelidate/core'
-import EmailInput from '@/components/EmailInput.vue'
-import ButtonSign from '../components/ButtonSign.vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
+
+import useVuelidate from '@vuelidate/core'
 import { required, email, helpers } from '@vuelidate/validators'
-import router from '@/router'
+
+import EmailInput from '@/components/EmailInput.vue'
+import ButtonSign from '@/components/ButtonSign.vue'
+
+const router = useRouter()
 
 const { t } = useI18n({
   useScope: 'global',
   inheritLocale: true
 })
-const isPasswordValid = (value: string) =>
-  /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/.test(value)
+
 const rulesOfValidation = {
   email: {
     required: helpers.withMessage(t('errors.required-email'), required),
     email: helpers.withMessage(t('errors.invalid-email'), email)
-  },
+  }
 }
 
 const form = reactive({
