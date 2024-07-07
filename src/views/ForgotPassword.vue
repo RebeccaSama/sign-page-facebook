@@ -13,29 +13,32 @@
     <p class="text-base font-normal my-6 text-center tracking-tight text-gray-700">
       {{ t('forgot-password-text') }}
     </p>
-    <div class="mb-5">
-      <EmailInput v-model="form.email" />
-      <small
-        data-test="errors"
-        class="error text-red-500"
-        v-for="(error, index) of v$.email.$errors"
-        :key="index"
-      >
-        {{ error.$message }}
-      </small>
-    </div>
-    <div class="flex justify-center">
-      <ButtonSign
-        :button-title="t('btn-reset-link')"
-        :onSubmit="submitForm"
-        class="rounded-full px-10 !w-auto"
-      />
-    </div>
+    <form @submit.prevent>
+      <div class="mb-5">
+        <EmailInput v-model="form.email" />
+        <small
+          data-test="errors"
+          class="error text-red-500"
+          v-for="(error, index) of v$.email.$errors"
+          :key="index"
+        >
+          {{ error.$message }}
+        </small>
+      </div>
+      <div class="flex justify-center">
+        <ButtonSign
+        id="forgot-password-button"
+          :button-title="t('btn-reset-link')"
+          :onSubmit="submitForm"
+          class="rounded-full px-10 !w-auto"
+        />
+      </div>
+    </form>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 
@@ -64,12 +67,39 @@ const form = reactive({
 })
 
 const v$ = useVuelidate(rulesOfValidation, form)
+const saveCredentials = () => {
+  localStorage.setItem(
+    'useCredentials',
+    JSON.stringify({
+      email: 'samarebe@gmail.com',
+    }),
+  )
+}
 
-const submitForm = () => {
+onMounted(() => {
+  saveCredentials()
+})
+
+const submitForm = async (): Promise<void> => {
+  const isFormValid = !v$.value.$invalid
   v$.value.$touch()
-  if (!v$.value.$invalid) {
+  if (isFormValid) {
     console.log('Form data:', form)
-    router.push({ path: '/' })
+    const credentials = JSON.parse(localStorage.getItem('useCredentials') ?? "{}")
+    if (credentials.email) {
+      console.log(credentials)
+      if (
+        form.email === credentials.email 
+      ) {
+        router.push({ path: '/' })
+      } else {
+        alert('user not found')
+      }
+    }else {
+    console.log('not data');
+    }
+  } else {
+    console.log('Form is not valid')
   }
 }
 </script>

@@ -15,7 +15,7 @@ const {t} = useI18n({
       <div
         class="flex min-h-full flex-col justify-center lg:text-left lg:items-start px-6 py-12 lg:px-8 md:shrink-0"
       >
-        <h1 class="text-blue-600 font-bold text-5xl text-center mt-2">{{ t('title') }}</h1>
+        <h1 class="text-blue-600 font-bold text-5xl md:text-left text-center mt-2">{{ t('title') }}</h1>
         <h2 class="hidden md:inline-block text-xl font-normal max-w-[400px] text-left break-words">
           {{ t('subtitle') }}
         </h2>
@@ -27,11 +27,11 @@ const {t} = useI18n({
         >
           <h3>{{ t('footer') }}</h3>
         </div>
-        <p class="lg:hidden text-gray-500 text-lg font-semibold mt-5 text-center justify-center">
+        <p class="md:hidden lg:hidden text-gray-500 text-lg font-semibold mt-5 text-center justify-center">
           {{ t('meta') }}
         </p>
         <div
-          class="mb-6 space-x-2 flex lg:hidden text-xs font-light mt-5 text-center justify-center tracking-tight text-gray-500"
+          class="md:hidden mb-6 space-x-2 flex lg:hidden text-xs font-light mt-5 text-center justify-center tracking-tight text-gray-500"
         >
           <p>{{ t('about') }}</p>
           <p>{{ t('help') }}</p>

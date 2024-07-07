@@ -23,10 +23,11 @@
             {{ error.$message }}
           </small>
         </div>
-        <ButtonSign :button-title="t('btn-login')" :onSubmit="submitForm" class="mb-5" />
+        <ButtonSign  id="loginButton" :button-title="t('btn-login')" :onSubmit="submitForm" class="mb-5" />
         <div class="text-center">
           <RouterLink
             to="/forgot-password"
+            id="forgot-password"
             class="mb-2 text-center text-sm font-medium text-blue-500 hover:text-blue-600"
             >{{ t('forgot-password') }}?</RouterLink
           >
@@ -39,6 +40,7 @@
 
         <div class="justify-center">
           <ButtonSign
+          id="createAccountButton"
             :button-title="t('btn-create-new-account')"
             :onSubmit="createAccount"
             class="px-4 mt-2 w-48 justify-center bg-green-500 hover:bg-green-600"
