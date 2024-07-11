@@ -1,4 +1,3 @@
-
 describe('To log in : ', () => {
   beforeEach(() => {
     cy.visit('/');
@@ -8,13 +7,14 @@ describe('To log in : ', () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('input[name="password"]').type('AZaz@1');
     cy.get('#loginButton').click();
+
     cy.url().should('include', '/home');
   });
+
 describe("Error when : ", () => {
   it('the email field is empty', () => {
     cy.get('input[name="email"]').clear();
     cy.get('#loginButton').click();
-
     cy.contains('Email is required.').should('be.visible');
     cy.url().should('include', '/');
   });
@@ -23,7 +23,6 @@ describe("Error when : ", () => {
     cy.get('input[name="email"]').type('wrong@email.com');
     cy.get('input[name="password"]').type('QSqs1@');
     cy.get('#loginButton').click();
-    
     cy.url().should('eq', Cypress.config().baseUrl);
   });
 
@@ -31,7 +30,6 @@ describe("Error when : ", () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('input[name="password"]').type('QSqs1@');
     cy.get('#loginButton').click();
-  
     cy.url().should('eq', Cypress.config().baseUrl);
   });
 
@@ -39,7 +37,6 @@ describe("Error when : ", () => {
     cy.get('input[name="email"]').type('sama@gmail.com');
     cy.get('input[name="password"]').type('AZaz@1');
     cy.get('#loginButton').click();
-  
     cy.url().should('eq', Cypress.config().baseUrl );
   });
 
@@ -47,7 +44,6 @@ describe("Error when : ", () => {
     cy.get('input[name="email"]').type('wrong@email');
     cy.get('input[name="password"]').type('QSrrrrr');
     cy.get('#loginButton').click();
-
     cy.contains('Please enter a valid email address.').should('be.visible');
     cy.contains('The password requires an uppercase, lowercase, number and special character').should('be.visible');
   });
@@ -55,28 +51,13 @@ describe("Error when : ", () => {
   it("password size is less than 6 ", () => {
     cy.get('input[name="password"]').type('j');
     cy.get('#loginButton').click();
-
     cy.contains('This field should be at least 6 characters long').should('be.visible');
   });
   
-   it("I click on the forgotten password", () => {
-    cy.get('#forgot-password').click();
-
+  it("I click on the forgotten password", () => {
+    cy.get('#forgot-password-link').click();
     cy.url().should('include', '/forgot-password');
   });
-  
 });
   
 });
-
-
-
-  /*it('Affiche correctement la page d\'authentification', () => {
-    cy.get('h1').should('contain.text','facebook');
-    cy.get('input[name="email"]').should('be.visible');
-    cy.get('input[name="password"]').should('be.visible');
-    cy.contains('button', 'btn-login').should('be.visible');
-    cy.contains('a', 'forgot-password-text').should('be.visible');
-    cy.contains('button', 'btn-create-new-account').should('be.visible');
-    cy.contains('text', 'footer').should('be.visible');
-  }); */

@@ -1,18 +1,19 @@
 <template>
-  <div class="hidden">
-    <pre>
-    {{ JSON.stringify(form, null, 2) }}
-  </pre
-    >
-  </div>
+    <Modal :title="modalTitle" :isOpen="isModalOpen" @update:isOpen="isModalOpen = false"  class="  text-center text-red-500 bg-red-100">
+      <template v-slot:header>
+      <h3>{{ modalTitle }}</h3>
+    </template>
+    <p>{{ modalMessage }}</p>
+  </Modal>
   <div class="p-5 min-w-92 justify-center rounded-lg md:mt-12 shrink-0 md:bg-white md:shadow-lg">
     <div class="md:text-center justify-center md:font-semibold md:text-xl mb-5 hidden">
-      {{ t('form-title') }}
+      {{ t('form_title') }}
     </div>
     <form @submit.prevent="submitForm">
       <div class="items-center mx-auto">
         <div class="mb-5">
           <EmailInput v-model.trim="form.email" />
+         
           <small data-test='errors' class="error text-red-500" v-for="error of v$.email.$errors" :key="error.$uid">
             {{ error.$message }}
           </small>
@@ -23,13 +24,13 @@
             {{ error.$message }}
           </small>
         </div>
-        <ButtonSign  id="loginButton" :button-title="t('btn-login')" :onSubmit="submitForm" class="mb-5" />
+        <ButtonSign  id="loginButton" :button-title="t('btn_login')" @click.prevent="submitForm" class="mb-5" />
         <div class="text-center">
           <RouterLink
             to="/forgot-password"
-            id="forgot-password"
+            id="forgot-password-link"
             class="mb-2 text-center text-sm font-medium text-blue-500 hover:text-blue-600"
-            >{{ t('forgot-password') }}?</RouterLink
+            >{{ t('forgot_password') }}?</RouterLink
           >
         </div>
         <div class="flex justify-center item-center px-4">
@@ -41,19 +42,21 @@
         <div class="justify-center">
           <ButtonSign
           id="createAccountButton"
-            :button-title="t('btn-create-new-account')"
-            :onSubmit="createAccount"
+            :button-title="t('btn_create_new_account')"
+            @click.prevent = "createAccount"
             class="px-4 mt-2 w-48 justify-center bg-green-500 hover:bg-green-600"
           />
         </div>
       </div>
     </form>
-  
+    
   </div>
+
+  
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, email, helpers } from '@vuelidate/validators'
 import { useI18n } from 'vue-i18n'
@@ -71,13 +74,13 @@ const isPasswordValid = (value: string) =>
   /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/.test(value)
 const rulesOfValidation = {
   email: {
-    required: helpers.withMessage(t('errors.required-email'), required),
-    email: helpers.withMessage(t('errors.invalid-email'), email)
+    required: helpers.withMessage(t('errors.required_email'), required),
+    email: helpers.withMessage(t('errors.invalid_email'), email)
   },
   password: {
-    required: helpers.withMessage(t('errors.required-password'), required),
-    minLength: helpers.withMessage(t('errors.invalid-password-length'), minLength(6)),
-    containsPasswordRequirement: helpers.withMessage(t('errors.invalid-password'), isPasswordValid)
+    required: helpers.withMessage(t('errors.required_password'), required),
+    minLength: helpers.withMessage(t('errors.invalid_password_length'), minLength(6)),
+    containsPasswordRequirement: helpers.withMessage(t('errors.invalid_password'), isPasswordValid)
   }
 }
 
@@ -97,6 +100,10 @@ const saveCredentials = () => {
   )
 }
 
+const isModalOpen = ref(false);
+const modalTitle = ref('');
+const modalMessage = ref('');
+
 onMounted(() => {
   saveCredentials()
 })
@@ -105,27 +112,23 @@ const submitForm = async (): Promise<void> => {
   const isFormValid = !v$.value.$invalid
   v$.value.$touch()
   if (isFormValid) {
-    console.log('Form data:', form)
     const credentials = JSON.parse(localStorage.getItem('useCredentials') ?? "{}")
     if (credentials.email) {
-      console.log(credentials)
       if (
         form.email === credentials.email &&
         form.password === credentials.password
       ) {
         router.push({ path: '/home' })
       } else {
-        console.log('user not found')
+        modalTitle.value = t('error');
+      modalMessage.value = t('user_not_found');
+      isModalOpen.value = true;
       }
-    }else {
-    console.log('not data');
     }
-  } else {
-    console.log('Form is not valid')
   }
 }
 
 const createAccount = () => {
-  console.log('creating account')
+  router.push({ path: '/' })
 }
 </script>

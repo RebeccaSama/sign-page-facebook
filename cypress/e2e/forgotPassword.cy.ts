@@ -1,6 +1,8 @@
-describe('To reset your password  : ', () => {
+describe('To reset your password : ', () => {
   beforeEach(() => {
-    cy.visit('/forgot-password');
+    cy.visit('/');
+    cy.get('#forgot-password-link').click();
+    cy.url().should('include', '/forgot-password');
   });
 
   it("Enter your valid and existing email", () => {

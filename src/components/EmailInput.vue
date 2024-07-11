@@ -7,7 +7,7 @@
       autocomplete="email"
       required
       class="block w-full rounded-md py-2.5 px-4 text-gray-800 form-control shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 xs:text-xs xs:leading-6"
-      :placeholder="t('placeholder-email')"
+      :placeholder="t('placeholder_email')"
       v-model="model"
     />
   </div>

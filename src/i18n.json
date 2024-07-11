@@ -1,0 +1,63 @@
+{
+    "en": {
+        "signIn_title": "facebook",
+        "signIn_subtitle": "Connect with friends and the world around you on Facebook.",
+        "signIn_footer": "Create a page for a celebrity, band or business.",
+        "meta": "Meta",
+        "about": "About",
+        "help": "Help",
+        "more": "More",
+        "forgot_password_title": "Forgot Password",
+        "forgot_password_subtitle": "Enter the email address or your phone number you used when you joined, and we will send you instructions to reset your password.",
+        "btn_reset_link": "Send reset link",
+        "forgot_password": "Forgot Password",
+        "btn_login": "Log In",
+        "btn_create_new_account": "Create new account",
+        "form_title": "Connect to Facebook",
+        "or": "or",
+        "placeholder_email": "Email or phone number",
+        "placeholder_password": "Password",
+        "errors": {
+          "invalid_email": "Please enter a valid email address.",
+          "invalid_password": "The password requires an uppercase, lowercase, number and special character.",
+          "required_email": "Email is required.",
+          "required_password": "Password is required.",
+          "invalid_password_length": "This field should be at least 6 characters long."
+        },
+        "error": "Error",
+        "email_not_found": "This email does not exist. Please enter your email",
+        "btn_close": "Cancel",
+        "user_not_found" : "Incorrect email or password, please enter your correct data"
+        },
+    "fr": {
+      "signIn_title": "facebook",
+      "signIn_subtitle": "Connectez-vous avec des amis et le monde qui vous entoure sur Facebook.",
+      "signIn_footer": "Créez une page pour une célébrité, un groupe ou une entreprise.",
+      "meta": "Meta",
+      "about": "À propos",
+      "help": "Aide",
+      "more": "Plus",
+      "forgot_password_title": "Mots se passe oublié",
+      "forgot_password_subtitle": "Saisissez l'adresse électronique ou le numéro de téléphone que vous avez utilisé lors de votre inscription, et nous vous enverrons des instructions pour réinitialiser votre mot de passe.",
+      "btn_reset_link": "Envoyer le lien de réinitialisation",
+      "forgot_password": "Mots de passe oublié ",
+      "btn_login": "se connecter",
+      "btn_create_new_account": "Créer un nouveau compte",
+      "form_title": "Se connecter à Facebook",
+      "or": "ou",
+      "placeholder_email": "Email ou numéro de téléphone",
+      "placeholder_password": "Mots de passe",
+      "errors": {
+        "invalid_email": "Veuillez entrer une adresse email valide.",
+        "invalid_password": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre.",
+        "required_email": "Email est requis.",
+        "required_password": "Le mot de passe est requis.",
+        "invalid_password_length": "Le champ doit contenir au moins 6 caractères."
+      },
+      "error": "Erreur",
+      "email_not_found": "Cet email n'existe pas. Veuillez entrer votre email",
+      "btn_close": "Fermer",
+      "user_not_found" : "Email ou mots de passe incorrecte, veuillez entrer vos données correctes"
+    }
+}
+  

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n';
-import FormPage from '@/components/FormPage.vue'
+import FormPage from '@/components/FormComponent.vue'
 
 const {t} = useI18n({
   useScope: 'global',
@@ -15,9 +15,9 @@ const {t} = useI18n({
       <div
         class="flex min-h-full flex-col justify-center lg:text-left lg:items-start px-6 py-12 lg:px-8 md:shrink-0"
       >
-        <h1 class="text-blue-600 font-bold text-5xl md:text-left text-center mt-2">{{ t('title') }}</h1>
+        <h1 class="text-blue-600 font-bold text-5xl md:text-left text-center mt-2">{{ t('signIn_title') }}</h1>
         <h2 class="hidden md:inline-block text-xl font-normal max-w-[400px] text-left break-words">
-          {{ t('subtitle') }}
+          {{ t('signIn_subtitle') }}
         </h2>
       </div>
       <div class="px-6">
@@ -25,7 +25,7 @@ const {t} = useI18n({
         <div
           class="hidden md:inline-block text-base font-normal mt-10 text-center leading-9 tracking-tight text-gray-700"
         >
-          <h3>{{ t('footer') }}</h3>
+          <h3>{{ t('signIn_footer') }}</h3>
         </div>
         <p class="md:hidden lg:hidden text-gray-500 text-lg font-semibold mt-5 text-center justify-center">
           {{ t('meta') }}

@@ -7,7 +7,7 @@ import ForgotPasswordComponent from '@/views/ForgotPassword.vue'
 import EmailInput from '@/components/EmailInput.vue'
 import ButtonSign from '@/components/ButtonSign.vue'
 
-describe('ForgotPasswordComponent', () => {
+describe('To validate a forgotten password', () => {
   let wrapper: VueWrapper;
 
   const router = useRouter();
@@ -20,28 +20,28 @@ describe('ForgotPasswordComponent', () => {
     wrapper = mount(ForgotPasswordComponent);
   })
 
-  it.only('renders the form with the correct sub-components and placeholders', () => {
+  it('Check if input email and button exist', () => {
     expect(wrapper.findComponent(EmailInput).exists()).toBe(true)
     expect(wrapper.findComponent(ButtonSign).exists()).toBe(true)
-    expect(wrapper.findComponent(ButtonSign).props('buttonTitle')).toBe('btn-reset-link')
+    expect(wrapper.findComponent(ButtonSign).props('buttonTitle')).toBe('btn_reset_link')
   })
 
-  it('validates the form and shows errors for invalid inputs', async () => {
+  it('validates the form and shows errors for required email', async () => {
     await wrapper.findComponent(ButtonSign).trigger('click')
     await nextTick()
-    expect(wrapper.find("[data-test='errors']").text()).toBe('errors.required-email')
+    expect(wrapper.find("[data-test='errors']").text()).toBe('errors.required_email')
   })
 
-  it('validates the form and shows errors for invalid inputs', async () => {
+  it('validates the form and shows errors for invalid email', async () => {
     await wrapper.findComponent(EmailInput).find('input').setValue('test@example')
     await wrapper.findComponent(ButtonSign).trigger('click')
 
     await nextTick()
-    expect(wrapper.find("[data-test='errors']").text()).toBe('errors.invalid-email')
+    expect(wrapper.find("[data-test='errors']").text()).toBe('errors.invalid_email')
   })
 
-  it('submits the form with valid inputs and navigates to the home page', async () => {
-    await wrapper.findComponent(EmailInput).find('input').setValue('test@example.com')
+  it.only('submits the form with valid inputs and navigates to log in page', async () => {
+    await wrapper.findComponent(EmailInput).find('input').setValue('samarebe@gmail.com')
     await wrapper.findComponent(ButtonSign).trigger('click')
     await nextTick()
     expect(router.push).toHaveBeenCalledWith({ path: '/' })

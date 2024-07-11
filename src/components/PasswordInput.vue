@@ -1,24 +1,47 @@
 <template>
-  <div class="form-group">
+  <div class="relative">
     <input
       id="password"
       name="password"
-      type="password"
+      :type="passwordVisible ? 'text' : 'password'"
       autocomplete="current-password"
       required
       class="block w-full rounded-md py-2.5 px-4 text-gray-800 form-control shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 xs:text-xs xs:leading-6"
-      :placeholder="t('placeholder-password')"
+      :placeholder="t('placeholder_password')"
       v-model="model"
     />
+    <span id="show_hide" @click="togglePasswordVisibility" class="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer">
+      <IconPasswordOn v-if="passwordVisible" class="w-5 h-5 text-gray-500" />
+      <IconPasswordOff v-else class="w-5 h-5 text-gray-500" />
+    </span>
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import IconPasswordOn from '@/components/icons/IconPasswordOn.vue'
+import IconPasswordOff from '@/components/icons/IconPasswordOff.vue'
 
 const { t } = useI18n({
   useScope: 'global',
   inheritLocale: true
 })
+const passwordVisible = ref(false)
 const model = defineModel()
+
+const togglePasswordVisibility = () => {
+  passwordVisible.value = !passwordVisible.value
+}
 </script>
+
+<style scoped>
+.form-group {
+  position: relative;
+}
+.eye-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  cursor: pointer;
+}
+</style>
