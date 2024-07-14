@@ -17,11 +17,11 @@
         </div>
       </div>
     </div>
-  </template>
+</template>
   
-  <script lang="ts" setup>
+<script lang="ts" setup>
   import { defineProps, defineEmits } from 'vue';
-import { useI18n } from 'vue-i18n';
+  import { useI18n } from 'vue-i18n';
   
   const { t } = useI18n({
   useScope: 'global',
@@ -41,9 +41,9 @@ import { useI18n } from 'vue-i18n';
   
   const emit = defineEmits(['update:isOpen']);
   
-  const closeModal = () => {
+  const closeModal = ():void => {
     emit('update:isOpen', false);
   };
-  </script>
+</script>
  
   

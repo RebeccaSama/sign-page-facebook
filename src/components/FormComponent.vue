@@ -24,7 +24,7 @@
             {{ error.$message }}
           </small>
         </div>
-        <ButtonSign  id="loginButton" :button-title="t('btn_login')" @click.prevent="submitForm" class="mb-5" />
+        <ButtonComponent  id="loginButton" :title="t('btn_login')" @click.prevent="submitForm" class="mb-5" />
         <div class="text-center">
           <RouterLink
             to="/forgot-password"
@@ -40,30 +40,30 @@
         </div>
 
         <div class="justify-center">
-          <ButtonSign
+          <ButtonComponent
           id="createAccountButton"
-            :button-title="t('btn_create_new_account')"
+            :title="t('btn_create_new_account')"
             @click.prevent = "createAccount"
             class="px-4 mt-2 w-48 justify-center bg-green-500 hover:bg-green-600"
           />
         </div>
       </div>
     </form>
-    
   </div>
-
-  
 </template>
 
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, email, helpers } from '@vuelidate/validators'
-import { useI18n } from 'vue-i18n'
+import router from '../router/index'
+
 import EmailInput from '@/components/EmailInput.vue'
 import PasswordInput from './PasswordInput.vue'
-import ButtonSign from './ButtonSign.vue'
-import router from '../router/index'
+import ButtonComponent from './ButtonComponent.vue'
+
 
 const { t } = useI18n({
   useScope: 'global',
@@ -90,7 +90,7 @@ const form = reactive({
 })
 
 const v$ = useVuelidate(rulesOfValidation, form)
-const saveCredentials = () => {
+const saveCredentials = ():void => {
   localStorage.setItem(
     'useCredentials',
     JSON.stringify({
@@ -100,9 +100,9 @@ const saveCredentials = () => {
   )
 }
 
-const isModalOpen = ref(false);
-const modalTitle = ref('');
-const modalMessage = ref('');
+const isModalOpen = ref<boolean>(false);
+const modalTitle = ref<string>('');
+const modalMessage = ref<string>('');
 
 onMounted(() => {
   saveCredentials()
@@ -121,14 +121,14 @@ const submitForm = async (): Promise<void> => {
         router.push({ path: '/home' })
       } else {
         modalTitle.value = t('error');
-      modalMessage.value = t('user_not_found');
-      isModalOpen.value = true;
+        modalMessage.value = t('user_not_found');
+        isModalOpen.value = true;
       }
     }
   }
 }
 
-const createAccount = () => {
+const createAccount = ():void => {
   router.push({ path: '/' })
 }
 </script>

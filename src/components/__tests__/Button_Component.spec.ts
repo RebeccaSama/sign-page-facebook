@@ -1,18 +1,16 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { expect, describe, it, vi, beforeEach } from 'vitest';
-import ButtonSign from '@/components/ButtonSign.vue';
+import ButtonComponent from '@/components/ButtonComponent.vue';
 
-describe('ButtonSignComponent', () => {
+describe('Button Component', () => {
   let wrapper: VueWrapper;
   let onSubmit: any; 
 
   beforeEach(() => {
     vi.mock('vue-i18n');
-    onSubmit = vi.fn(); 
-    wrapper = mount(ButtonSign, {
+    wrapper = mount(ButtonComponent, {
       props: {
-        buttonTitle: 'Submit',
-        onSubmit,
+        title: 'title',
       },
     });
   });
@@ -22,7 +20,7 @@ describe('ButtonSignComponent', () => {
   });
 
   it('displays button text correctly', () => {
-    expect(wrapper.text()).toContain('Submit');
+    expect(wrapper.text()).toContain('title');
   });
 
 });

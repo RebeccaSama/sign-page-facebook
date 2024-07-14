@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+
 import IconPasswordOn from '@/components/icons/IconPasswordOn.vue'
 import IconPasswordOff from '@/components/icons/IconPasswordOff.vue'
 
@@ -27,10 +28,10 @@ const { t } = useI18n({
   useScope: 'global',
   inheritLocale: true
 })
-const passwordVisible = ref(false)
-const model = defineModel()
+const passwordVisible = ref<boolean>(false)
+const model = defineModel<string>()
 
-const togglePasswordVisibility = () => {
+const togglePasswordVisibility = ():void => {
   passwordVisible.value = !passwordVisible.value
 }
 </script>

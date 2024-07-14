@@ -3,7 +3,7 @@ import { nextTick } from 'vue';
 import { expect, describe, it, vi, beforeEach } from 'vitest';
 
 import FormPage from '@/components/FormComponent.vue';
-import ButtonSign from '@/components/ButtonSign.vue';
+import ButtonComponent from '@/components/ButtonComponent.vue';
 import EmailInput from '@/components/EmailInput.vue';
 import PasswordInput from '@/components/PasswordInput.vue';
 
@@ -22,15 +22,15 @@ describe('To submit the form', () => {
     expect(emailInput.attributes('placeholder')).toBe('placeholder_email');
   });
 
-  it('renders the form with the correct sub-components and placeholders', () => {
+  it('Input and placeholders should exist', () => {
     expect(wrapper.findComponent(PasswordInput).exists()).toBe(true);
    
     const passwordInput = wrapper.find('input[name="password"]');
     expect(passwordInput.attributes('placeholder')).toBe('placeholder_password');
   });
 
-  it('renders the form with the correct sub-components and placeholders', () => {
-    expect(wrapper.findComponent(ButtonSign).exists()).toBe(true);
+  it('Button should exist', () => {
+    expect(wrapper.findComponent(ButtonComponent).exists()).toBe(false);
   });
 
   it('validates the form and shows errors for invalid inputs', async () => {

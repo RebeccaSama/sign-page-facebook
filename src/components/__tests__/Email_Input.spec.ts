@@ -1,17 +1,18 @@
 import { VueWrapper, mount } from '@vue/test-utils'
 import { expect, describe, it, vi, beforeEach } from 'vitest'
-import EmailInputComponent from '@/components/EmailInput.vue'
+import EmailInput from '@/components/EmailInput.vue'
 
-describe('EmailInputComponent', () => {
+describe('Email Input', () => {
   let wrapper: VueWrapper;
   beforeEach(() => {
     vi.mock('vue-i18n')
-     wrapper = mount(EmailInputComponent)
+     wrapper = mount(EmailInput)
   })
-  it('renders the form with the correct sub-components and placeholders', () => {
-    expect(wrapper.findComponent(EmailInputComponent).exists()).toBe(true)
+  it('Should exist', () => {
+    expect(wrapper.findComponent(EmailInput).exists()).toBe(true)
   })
   it('renders the input with the correct placeholder', () => {
+    expect(wrapper.findComponent(EmailInput))
     const input = wrapper.find('input')
     expect(input.attributes('placeholder')).toBe('placeholder_email')
   })

@@ -1,15 +1,4 @@
-<script lang="ts" setup>
-import { useI18n } from 'vue-i18n';
-import FormPage from '@/components/FormComponent.vue'
-
-const {t} = useI18n({
-  useScope: 'global',
-  inheritLocale: true
-})
-</script>
-
 <template>
- 
   <div class=" md:pt-32 overflow-hidden ">
     <div class="md:flex justify-center md:space-x-20 pb-12 ">
       <div
@@ -27,11 +16,11 @@ const {t} = useI18n({
         >
           <h3>{{ t('signIn_footer') }}</h3>
         </div>
-        <p class="md:hidden lg:hidden text-gray-500 text-lg font-semibold mt-5 text-center justify-center">
+        <p class="md:hidden text-gray-500 text-lg font-semibold mt-5 text-center justify-center">
           {{ t('meta') }}
         </p>
         <div
-          class="md:hidden mb-6 space-x-2 flex lg:hidden text-xs font-light mt-5 text-center justify-center tracking-tight text-gray-500"
+          class="md:hidden mb-6 space-x-2 flex text-xs font-light mt-5 text-center justify-center tracking-tight text-gray-500"
         >
           <p>{{ t('about') }}</p>
           <p>{{ t('help') }}</p>
@@ -41,3 +30,14 @@ const {t} = useI18n({
     </div>
   </div>
 </template>
+
+<script lang="ts" setup>
+import { useI18n } from 'vue-i18n';
+
+import FormPage from '@/components/FormComponent.vue'
+
+const {t} = useI18n({
+  useScope: 'global',
+  inheritLocale: true
+})
+</script>

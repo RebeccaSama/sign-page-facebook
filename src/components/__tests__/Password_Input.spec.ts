@@ -7,8 +7,7 @@ describe('PasswordInputComponent', () => {
 
   beforeEach(async () => {
     vi.mock('vue-i18n');
-    wrapper = mount(PasswordInput);
-    await wrapper.vm.$nextTick(); 
+    wrapper = mount(PasswordInput); 
   });
 
   it('renders the input with the correct placeholder', () => {

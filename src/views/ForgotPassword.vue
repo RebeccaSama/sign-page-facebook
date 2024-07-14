@@ -15,9 +15,9 @@
         </small>
       </div>
       <div class="flex justify-center">
-        <ButtonSign
+        <ButtonComponent
           id="forgot-password-button"
-          :button-title="t('btn_reset_link')"
+          :title="t('btn_reset_link')"
           @click.prevent="submitForm"
           class="rounded-full px-10 !w-auto"
         />
@@ -42,7 +42,7 @@ import useVuelidate from '@vuelidate/core';
 import { required, email, helpers } from '@vuelidate/validators';
 
 import EmailInput from '@/components/EmailInput.vue';
-import ButtonSign from '@/components/ButtonSign.vue';
+import ButtonComponent from '@/components/ButtonComponent.vue';
 import IconArrowBack from '@/components/icons/IconArrowBack.vue';
 import Modal from '@/components/Modal.vue';
 
@@ -75,9 +75,9 @@ const saveCredentials = () => {
   );
 };
 
-const isModalOpen = ref(false);
-const modalTitle = ref('');
-const modalMessage = ref('');
+const isModalOpen = ref<boolean>(false);
+const modalTitle = ref<string>('');
+const modalMessage = ref<string>('');
 
 onMounted(() => {
   saveCredentials();

@@ -1,19 +1,19 @@
-describe('To reset your password : ', () => {
+describe('Reset your password', () => {
   beforeEach(() => {
     cy.visit('/');
     cy.get('#forgot-password-link').click();
     cy.url().should('include', '/forgot-password');
   });
 
-  it("Enter your valid and existing email", () => {
+  it("if you enter your valid and existing email, connexion should succed", () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('#forgot-password-button').click();
     
     cy.url().should('include', '/');
   });
 
-describe("Case of error when  :", () => {
-  it('the email field is empty', () => {
+describe("Case of error ", () => {
+  it('when the email field is empty', () => {
     cy.get('input[name="email"]').clear();
     cy.get('#forgot-password-button').click();
     
@@ -21,7 +21,7 @@ describe("Case of error when  :", () => {
     cy.url().should('include', '/forgot-password');
   });
 
-  it('the email entered does not respect the format', () => {
+  it('when the email entered does not respect the format', () => {
     cy.get('input[name="email"]').type('sama@good');
     cy.get('#forgot-password-button').click();
     
@@ -30,7 +30,7 @@ describe("Case of error when  :", () => {
   });
 });
  
-it("the entered email does not correspond to the registered email", () => {
+it("when the entered email does not correspond to the registered email", () => {
   cy.get('input[name="email"]').type('sam@gmail.com');
   cy.get('#forgot-password-button').click();
   

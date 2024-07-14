@@ -21,5 +21,5 @@ const { t } = useI18n({
   inheritLocale: true
 })
 
-const model = defineModel()
+const model = defineModel<string>()
 </script>
