@@ -1,8 +1,9 @@
 import { VueWrapper, mount } from '@vue/test-utils';
 import { expect, describe, it, vi, beforeEach } from 'vitest';
 import PasswordInput from '@/components/PasswordInput.vue';
+import { nextTick } from 'vue';
 
-describe('PasswordInputComponent', () => {
+describe('PasswordInput', () => {
   let wrapper: VueWrapper<any>;
 
   beforeEach(async () => {
@@ -25,7 +26,7 @@ describe('PasswordInputComponent', () => {
     expect(toggleButton.exists()).toBe(true);
 
     await toggleButton.trigger('click');
-    await wrapper.vm.$nextTick();
+    await nextTick();
 
     expect(wrapper.find('input[type="password"]').exists()).toBe(false);
     expect(wrapper.find('input[type="text"]').exists()).toBe(true);
@@ -36,13 +37,13 @@ describe('PasswordInputComponent', () => {
     expect(toggleButton.exists()).toBe(true);
 
     await toggleButton.trigger('click');
-    await wrapper.vm.$nextTick();
+    await nextTick();
 
     expect(wrapper.find('input[type="password"]').exists()).toBe(false);
     expect(wrapper.find('input[type="text"]').exists()).toBe(true);
 
     await toggleButton.trigger('click');
-    await wrapper.vm.$nextTick();
+    await nextTick();
 
     expect(wrapper.find('input[type="password"]').exists()).toBe(true);
     expect(wrapper.find('input[type="text"]').exists()).toBe(false);

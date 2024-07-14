@@ -3,7 +3,7 @@ describe('Log in ', () => {
     cy.visit('/');
   });
 
-  it("Should succed", () => {
+  it("should succed", () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('input[name="password"]').type('AZaz@1');
     cy.get('#loginButton').click();
@@ -11,7 +11,7 @@ describe('Log in ', () => {
     cy.url().should('include', '/home');
   });
 
-describe("Error ", () => {
+describe("should failed ", () => {
   it('when the email field is empty', () => {
     cy.get('input[name="email"]').clear();
     cy.get('#loginButton').click();

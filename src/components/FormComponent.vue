@@ -1,9 +1,9 @@
 <template>
-    <Modal :title="modalTitle" :isOpen="isModalOpen" @update:isOpen="isModalOpen = false"  class="  text-center text-red-500 bg-red-100">
+    <Modal :title="modalMessage.title" :isOpen="isModalOpen" @update:isOpen="isModalOpen = false"  class="  text-center text-red-500 bg-red-100">
       <template v-slot:header>
-      <h3>{{ modalTitle }}</h3>
+      <h3>{{ modalMessage.title }}</h3>
     </template>
-    <p>{{ modalMessage }}</p>
+    <p>{{ modalMessage.message }}</p>
   </Modal>
   <div class="p-5 min-w-92 justify-center rounded-lg md:mt-12 shrink-0 md:bg-white md:shadow-lg">
     <div class="md:text-center justify-center md:font-semibold md:text-xl mb-5 hidden">
@@ -13,7 +13,6 @@
       <div class="items-center mx-auto">
         <div class="mb-5">
           <EmailInput v-model.trim="form.email" />
-         
           <small data-test='errors' class="error text-red-500" v-for="error of v$.email.$errors" :key="error.$uid">
             {{ error.$message }}
           </small>
@@ -101,8 +100,10 @@ const saveCredentials = ():void => {
 }
 
 const isModalOpen = ref<boolean>(false);
-const modalTitle = ref<string>('');
-const modalMessage = ref<string>('');
+  const modalMessage = reactive({
+  title: '',
+  message: ''
+})
 
 onMounted(() => {
   saveCredentials()
@@ -120,8 +121,8 @@ const submitForm = async (): Promise<void> => {
       ) {
         router.push({ path: '/home' })
       } else {
-        modalTitle.value = t('error');
-        modalMessage.value = t('user_not_found');
+        modalMessage.title = t('error');
+        modalMessage.message = t('user_not_found');
         isModalOpen.value = true;
       }
     }

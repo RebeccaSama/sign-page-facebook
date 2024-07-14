@@ -6,7 +6,7 @@
       :type="passwordVisible ? 'text' : 'password'"
       autocomplete="current-password"
       required
-      class="block w-full rounded-md py-2.5 px-4 text-gray-800 form-control shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 xs:text-xs xs:leading-6"
+      class="block w-full rounded-md py-2.5 px-4 text-gray-800 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 xs:text-xs xs:leading-6"
       :placeholder="t('placeholder_password')"
       v-model="model"
     />
@@ -36,13 +36,3 @@ const togglePasswordVisibility = ():void => {
 }
 </script>
 
-<style scoped>
-.form-group {
-  position: relative;
-}
-.eye-icon {
-  width: 1.5rem;
-  height: 1.5rem;
-  cursor: pointer;
-}
-</style>

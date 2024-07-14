@@ -2,9 +2,8 @@ import { VueWrapper, mount } from '@vue/test-utils';
 import { expect, describe, it, vi, beforeEach } from 'vitest';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 
-describe('Button Component', () => {
+describe('ButtonComponent', () => {
   let wrapper: VueWrapper;
-  let onSubmit: any; 
 
   beforeEach(() => {
     vi.mock('vue-i18n');
