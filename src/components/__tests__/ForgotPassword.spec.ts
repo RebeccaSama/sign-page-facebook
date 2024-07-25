@@ -32,24 +32,25 @@ describe('To validate a forgotten password', () => {
     expect(wrapper.findComponent(ButtonComponent).exists()).toBe(true)
     expect(wrapper.findComponent(ButtonComponent).props('title')).toBe('btn_reset_link')
   })
-
-  it('show errors message after click if email input is empty', async () => {
-    await wrapper.findComponent(ButtonComponent).trigger('click')
-    await nextTick()
-    expect(wrapper.find("[data-test='errors']").text()).toBe('errors.required_email')
-  })
+describe('errors', () => {
+  it.only('when the email is empty', async () => {      
+    await wrapper.find('#forgot-password-button').trigger('click');
+    
+    expect(wrapper.find("[data-test='errors']").text()).toContain('errors.required_email');
+  });
 
   it('show errors message after click if email input is invalid', async () => {
     await wrapper.findComponent(EmailInput).find('input').setValue('test@example')
-    await wrapper.findComponent(ButtonComponent).trigger('click')
+    await wrapper.findComponent('#forgot-password-button').trigger('click')
 
     await nextTick()
     expect(wrapper.find("[data-test='errors']").text()).toBe('errors.invalid_email')
   })
+})
 
   it('should succed if all fill are filled correctly', async () => {
     await wrapper.findComponent(EmailInput).find('input').setValue('samarebe@gmail.com')
-    await wrapper.findComponent(ButtonComponent).trigger('click')
+    await wrapper.findComponent('#forgot-password-button').trigger('click')
     await nextTick()
     expect(router.push).toHaveBeenCalledWith({ path: '/' })
   })

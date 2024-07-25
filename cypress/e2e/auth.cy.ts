@@ -3,7 +3,7 @@ describe('Log in ', () => {
     cy.visit('/');
   });
 
-  it("should succed", () => {
+  it("should succeed", () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('input[name="password"]').type('AZaz@1');
     cy.get('#loginButton').click();
@@ -11,18 +11,18 @@ describe('Log in ', () => {
     cy.url().should('include', '/home');
   });
 
-describe("should failed ", () => {
-  it('when the email field is empty', () => {
-    cy.get('input[name="email"]').clear();
+describe("should fail", () => {
+  it('when the email and password field are empty', () => {
     cy.get('#loginButton').click();
-    cy.contains('Email is required.').should('be.visible');
-    cy.url().should('include', '/');
+    cy.get("[data-test='errors']").should('contain.text','Email is required');
+    cy.get("[data-test='errors']").should('contain.text','Password is required');
   });
 
   it("when the email and password entered have not yet been saved", () => {
     cy.get('input[name="email"]').type('wrong@email.com');
     cy.get('input[name="password"]').type('QSqs1@');
     cy.get('#loginButton').click();
+    cy.get("[data-test='modal-wrapper']").should('contain.text',"Incorrect email or password, please enter your correct informations");
     cy.url().should('eq', Cypress.config().baseUrl);
   });
 
@@ -30,6 +30,7 @@ describe("should failed ", () => {
     cy.get('input[name="email"]').type('samarebe@gmail.com');
     cy.get('input[name="password"]').type('QSqs1@');
     cy.get('#loginButton').click();
+    cy.get("[data-test='modal-wrapper']").should('contain.text',"Incorrect email or password, please enter your correct informations");
     cy.url().should('eq', Cypress.config().baseUrl);
   });
 
@@ -37,6 +38,7 @@ describe("should failed ", () => {
     cy.get('input[name="email"]').type('sama@gmail.com');
     cy.get('input[name="password"]').type('AZaz@1');
     cy.get('#loginButton').click();
+    cy.get("[data-test='modal-wrapper']").should('contain.text',"Incorrect email or password, please enter your correct informations");
     cy.url().should('eq', Cypress.config().baseUrl );
   });
 
@@ -44,14 +46,14 @@ describe("should failed ", () => {
     cy.get('input[name="email"]').type('wrong@email');
     cy.get('input[name="password"]').type('QSrrrrr');
     cy.get('#loginButton').click();
-    cy.contains('Please enter a valid email address.').should('be.visible');
-    cy.contains('The password requires an uppercase, lowercase, number and special character').should('be.visible');
+    cy.get("[data-test='errors']").should('contain.text','Please enter a valid email address.');
+    cy.get("[data-test='errors']").should('contain.text','The password requires an uppercase, lowercase, number and special character.');
   });
 
   it("when password size is less than 6 ", () => {
     cy.get('input[name="password"]').type('j');
     cy.get('#loginButton').click();
-    cy.contains('This field should be at least 6 characters long').should('be.visible');
+    cy.get("[data-test='errors']").should('contain.text','This field should be at least 6 characters long.');
   });
   
   it("when I click on the forgotten password", () => {

@@ -1,6 +1,6 @@
 <template>
-    <Modal :title="modalMessage.title" :isOpen="isModalOpen" @update:isOpen="isModalOpen = false"  class="  text-center text-red-500 bg-red-100">
-      <template v-slot:header>
+  <Modal v-if="isModalOpen" data-test="modal-wrapper" :title="modalMessage.title"  @click="isModalOpen = false" class="text-center text-red-500 bg-red-100">
+    <template v-slot:header>
       <h3>{{ modalMessage.title }}</h3>
     </template>
     <p>{{ modalMessage.message }}</p>
@@ -12,37 +12,31 @@
     <form @submit.prevent="submitForm">
       <div class="items-center mx-auto">
         <div class="mb-5">
-          <EmailInput v-model.trim="form.email" />
-          <small data-test='errors' class="error text-red-500" v-for="error of v$.email.$errors" :key="error.$uid">
-            {{ error.$message }}
-          </small>
+          <EmailInput v-model.trim="form.email" :errorMessages="v$.email.$errors"/>
         </div>
         <div class="mb-5 flex flex-col">
-          <PasswordInput v-model.trim="form.password" />
-          <small class="error text-red-500" v-for="error of v$.password.$errors" :key="error.$uid">
-            {{ error.$message }}
-          </small>
+          <PasswordInput v-model.trim="form.password" :errorMessages="v$.password.$errors"/>
         </div>
-        <ButtonComponent  id="loginButton" :title="t('btn_login')" @click.prevent="submitForm" class="mb-5" />
+        <ButtonComponent id="loginButton" :title="t('btn_login')" @click.prevent="submitForm" class="mb-5" />
         <div class="text-center">
           <RouterLink
             to="/forgot-password"
             id="forgot-password-link"
             class="mb-2 text-center text-sm font-medium text-blue-500 hover:text-blue-600"
-            >{{ t('forgot_password') }}?</RouterLink
           >
+            {{ t('forgot_password') }}?
+          </RouterLink>
         </div>
         <div class="flex justify-center item-center px-4">
           <div class="my-10 md:my-5 border-t-2 border-gray-400 flex-grow"></div>
           <p class="my-7 md:my-2 mx-4 text-gray-600">{{ t('or') }}</p>
           <div class="my-10 md:my-5 border-t-2 border-gray-400 flex-grow"></div>
         </div>
-
         <div class="justify-center">
           <ButtonComponent
-          id="createAccountButton"
+            id="createAccountButton"
             :title="t('btn_create_new_account')"
-            @click.prevent = "createAccount"
+            @click.prevent="createAccount"
             class="px-4 mt-2 w-48 justify-center bg-green-500 hover:bg-green-600"
           />
         </div>
@@ -54,27 +48,29 @@
 <script lang="ts" setup>
 import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-
 import useVuelidate from '@vuelidate/core'
 import { required, minLength, email, helpers } from '@vuelidate/validators'
-import router from '../router/index'
+import { useRouter } from 'vue-router'
 
 import EmailInput from '@/components/EmailInput.vue'
 import PasswordInput from './PasswordInput.vue'
 import ButtonComponent from './ButtonComponent.vue'
-
 
 const { t } = useI18n({
   useScope: 'global',
   inheritLocale: true
 })
 
-const isPasswordValid = (value: string) =>
-  /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/.test(value)
+const router = useRouter()
+const isEmailValid = (value: string) => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)
+
+const isPasswordValid = (value: string) => /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/.test(value)
+
 const rulesOfValidation = {
   email: {
     required: helpers.withMessage(t('errors.required_email'), required),
-    email: helpers.withMessage(t('errors.invalid_email'), email)
+    email: helpers.withMessage(t('errors.invalid_email'), email),
+    containsEmailRequirement: helpers.withMessage(t('errors.invalid_email'), isEmailValid)
   },
   password: {
     required: helpers.withMessage(t('errors.required_password'), required),
@@ -89,18 +85,18 @@ const form = reactive({
 })
 
 const v$ = useVuelidate(rulesOfValidation, form)
-const saveCredentials = ():void => {
+const saveCredentials = (): void => {
   localStorage.setItem(
     'useCredentials',
     JSON.stringify({
       email: 'samarebe@gmail.com',
       password: 'AZaz@1'
-    }),
+    })
   )
 }
 
-const isModalOpen = ref<boolean>(false);
-  const modalMessage = reactive({
+const isModalOpen = ref<boolean>(false)
+const modalMessage = reactive({
   title: '',
   message: ''
 })
@@ -119,17 +115,17 @@ const submitForm = async (): Promise<void> => {
         form.email === credentials.email &&
         form.password === credentials.password
       ) {
-        router.push({ path: '/home' })
+        router.push('/home' )
       } else {
-        modalMessage.title = t('error');
-        modalMessage.message = t('user_not_found');
-        isModalOpen.value = true;
+        modalMessage.title = t('error')
+        modalMessage.message = t('user_not_found')
+        isModalOpen.value = true
       }
     }
   }
 }
 
-const createAccount = ():void => {
+const createAccount = (): void => {
   router.push({ path: '/' })
 }
 </script>

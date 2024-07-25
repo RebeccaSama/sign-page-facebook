@@ -1,5 +1,5 @@
 <template>
-    <div v-if="isOpen" class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
+    <div class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center z-50">
       <div class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6">
         <div class="flex justify-between items-center border-b pb-3">
           <slot name="header">
@@ -33,10 +33,6 @@
       type: String,
       default: 'Modal Title'
     },
-    isOpen: {
-      type: Boolean,
-      required: true
-    }
   });
   
   const emit = defineEmits(['update:isOpen']);

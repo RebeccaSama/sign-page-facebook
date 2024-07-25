@@ -20,14 +20,15 @@
         "errors": {
           "invalid_email": "Please enter a valid email address.",
           "invalid_password": "The password requires an uppercase, lowercase, number and special character.",
-          "required_email": "Email is required.",
-          "required_password": "Password is required.",
-          "invalid_password_length": "This field should be at least 6 characters long."
+          "required_email": "Email is required",
+          "required_password": "Password is required",
+          "invalid_password_length": "This field should be at least 6 characters long.",
+          "email_too_long": "Email is too long"
         },
         "error": "Error",
         "email_not_found": "This email does not exist. Please enter your email",
         "btn_close": "Cancel",
-        "user_not_found" : "Incorrect email or password, please enter your correct data"
+        "user_not_found" : "Incorrect email or password, please enter your correct informations"
         },
     "fr": {
       "signIn_title": "facebook",
@@ -52,7 +53,8 @@
         "invalid_password": "Le mot de passe doit contenir une majuscule, une minuscule, un chiffre.",
         "required_email": "Email est requis.",
         "required_password": "Le mot de passe est requis.",
-        "invalid_password_length": "Le champ doit contenir au moins 6 caractères."
+        "invalid_password_length": "Le champ doit contenir au moins 6 caractères.",
+        "email_too_long": "Email trop long "
       },
       "error": "Erreur",
       "email_not_found": "Cet email n'existe pas. Veuillez entrer votre email",

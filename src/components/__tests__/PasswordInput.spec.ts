@@ -48,4 +48,35 @@ describe('PasswordInput', () => {
     expect(wrapper.find('input[type="password"]').exists()).toBe(true);
     expect(wrapper.find('input[type="text"]').exists()).toBe(false);
   });
+  describe('error', () => {
+    it("when password size is less than 6 ", async () => {
+      await wrapper.find('input').setValue('QSr');
+      expect(wrapper.find("[data-test='errors']").exists()).toBe(false)
+      await wrapper.setProps({
+        errorMessages: [{$message: "errors.invalid_password_length"}]
+      })
+      expect(wrapper.find("[data-test='errors']").exists()).toBe(true)
+      expect(wrapper.find("[data-test='errors']").text()).toContain('errors.invalid_password_length')
+    });
+
+    it('when the password input is empty', async () => {
+      await wrapper.find('input').setValue('');
+      expect(wrapper.find("[data-test='errors']").exists()).toBe(false)
+      await wrapper.setProps({
+        errorMessages: [{$message: "errors.required_password"}]
+      })
+      expect(wrapper.find("[data-test='errors']").exists()).toBe(true)
+      expect(wrapper.find("[data-test='errors']").text()).toContain('errors.required_password')
+    })
+  });
+
+  it('when password formatting is invalid', async () => {
+    await wrapper.find('input').setValue('QSr887');
+    expect(wrapper.find("[data-test='errors']").exists()).toBe(false)
+    await wrapper.setProps({
+      errorMessages: [{$message: "errors.invalid_password"}]
+    })
+    expect(wrapper.find("[data-test='errors']").exists()).toBe(true)
+    expect(wrapper.find("[data-test='errors']").text()).toContain('errors.invalid_password')
+  })
 });

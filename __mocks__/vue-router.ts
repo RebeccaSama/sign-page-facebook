@@ -6,12 +6,8 @@ export const useRouter = vi.fn(() => ({
 }));
 
 export const useRoute = vi.fn(() => ({
+  path: "",
   meta: {
     menuItem: "one menu item",
-  },
-  name: "vehicles",
-  path: vi.fn(),
-  params: {
-    id: "1234",
   },
 }));

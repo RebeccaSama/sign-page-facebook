@@ -10,15 +10,30 @@
       :placeholder="t('placeholder_email')"
       v-model="model"
     />
+    <small data-test='errors'
+    v-if="errorMessages?.length"  
+    class="text-red-500 border-red-600" 
+    v-for="error of errorMessages" :key="error.$uid"
+    >
+    {{ error.$message }}
+    </small>
   </div>
 </template>
 
 <script lang="ts" setup>
+import type { ErrorObject } from '@vuelidate/core';
+import type { PropType } from 'vue';
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n({
   useScope: 'global',
   inheritLocale: true
+})
+defineProps({
+  errorMessages: {
+    type: Object as PropType<ErrorObject[]>,
+    default: [] as PropType<ErrorObject[]>,
+  }
 })
 
 const model = defineModel<string>()

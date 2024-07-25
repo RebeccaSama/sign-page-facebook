@@ -25,12 +25,12 @@
     </form>
   </div>
 
-  <Modal :title="modalTitle" :isOpen="isModalOpen" @update:isOpen="isModalOpen = false">
+  <ModalComponent v-if="isModalOpen" data-test="errors" :title="modalTitle" @click="isModalOpen = false">
     <template v-slot:header>
       <h3>{{ modalTitle }}</h3>
     </template>
     <p>{{ modalMessage }}</p>
-  </Modal>
+  </ModalComponent>
 </template>
 
 <script lang="ts" setup>
@@ -44,7 +44,7 @@ import { required, email, helpers } from '@vuelidate/validators';
 import EmailInput from '@/components/EmailInput.vue';
 import ButtonComponent from '@/components/ButtonComponent.vue';
 import IconArrowBack from '@/components/icons/IconArrowBack.vue';
-import Modal from '@/components/Modal.vue';
+import ModalComponent from '@/components/ModalComponent.vue';
 
 const router = useRouter();
 
@@ -63,6 +63,7 @@ const rulesOfValidation = {
 const form = reactive({
   email: ''
 });
+const isModalOpen = ref<boolean>(false)
 
 const v$ = useVuelidate(rulesOfValidation, form);
 
@@ -75,7 +76,6 @@ const saveCredentials = () => {
   );
 };
 
-const isModalOpen = ref<boolean>(false);
 const modalTitle = ref<string>('');
 const modalMessage = ref<string>('');
 
